@@ -6,7 +6,7 @@ import os
 import sys
 
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "1"
+os.environ["CUDA_VISIBLE_DEVICES"] = "2"
 argv = sys.argv[1:]
 
 UNIT = 128
@@ -19,7 +19,6 @@ DIM = 768
 PAD = 0.0
 
 MODEL_PATH = './models/smartbert_bilstm.keras'
-# calculate by the data count of entire dataset
 
 
 def buildModel():

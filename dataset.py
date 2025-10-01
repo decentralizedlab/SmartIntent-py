@@ -4,7 +4,7 @@ import tensorflow as tf
 from tensorflow.keras import backend as K
 
 
-HOST = '192.168.41.45'
+HOST = '192.168.51.51'
 DATABASE = 'web3'
 USER = 'web3'
 PASSWORD = 'web3'
@@ -99,7 +99,7 @@ def getBatch(start_id, n):
 
                 # Check if data is null
                 if row[4] is None:
-                    print(f"ID: {row[0]} - Embedding data is null")
+                    print(f"ID: {row[0]} - Embedding2 data is null")
                     continue
 
                 # Parse embedding data

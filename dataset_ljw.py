@@ -5,7 +5,7 @@ from collections import Counter
 
 
 # 数据库连接信息
-HOST = '192.168.41.45'
+HOST = '192.168.51.51'
 DATABASE = 'web3'
 USER = 'web3'
 PASSWORD = 'web3'

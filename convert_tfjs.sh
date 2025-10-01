@@ -1,9 +1,10 @@
 #!/bin/bash
+export CUDA_VISIBLE_DEVICES=none
 
 # 定义变量
-MODEL=smartbert_bilstm.keras
-DIR=smartbert_bilstm
-JS=smartbert_bilstm_js
+MODEL=smartbert_lstm.keras
+DIR=smartbert_lstm
+JS=smartbert_lstm_js
 
 # 运行Python脚本，传入命令行参数
 python save_model.py --model_path ./models/$MODEL --model_dir ./models/$DIR

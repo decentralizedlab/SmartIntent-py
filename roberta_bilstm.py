@@ -5,9 +5,9 @@ import dataset_ljw as db2
 import os
 import sys
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "2"
-argv = sys.argv[1:]
 
+os.environ["CUDA_VISIBLE_DEVICES"] = "1"
+argv = sys.argv[1:]
 
 UNIT = 128
 BATCH = 80
@@ -18,13 +18,16 @@ MAX_SEQ = 256
 DIM = 768
 PAD = 0.0
 
-MODEL_PATH = './models/smartbert_lstm.keras'
+MODEL_PATH = './models/roberta_bilstm.keras'
 
 
 def buildModel():
     model = keras.Sequential()
-    model.add(keras.layers.Masking(mask_value=PAD, input_shape=(MAX_SEQ, DIM)))
-    model.add(keras.layers.LSTM(UNIT, return_sequences=False))
+    model.add(keras.layers.Masking(
+        mask_value=PAD, input_shape=(MAX_SEQ, DIM)))
+    model.add(keras.layers.Bidirectional(
+        keras.layers.LSTM(units=UNIT, return_sequences=False)))
+    # model.add(keras.layers.LayerNormalization())
     model.add(keras.layers.Dropout(DROP))
     model.add(keras.layers.Dense(10, activation='sigmoid'))
     model.summary()
@@ -189,7 +192,6 @@ def evaluate(start=20000, batch=10000):
     print("F1 Score:", sum(category_f1) / len(db.TYPE))
     print("==========================================================")
 
-    # Compute the evaluation metrics
     accuracy = keras.metrics.BinaryAccuracy()(ty_eval, y_pred_binary)
     precision = keras.metrics.Precision()(ty_eval, y_pred_binary)
     recall = keras.metrics.Recall()(ty_eval, y_pred_binary)
@@ -197,7 +199,6 @@ def evaluate(start=20000, batch=10000):
 
     print("==========================================================")
     print("Total Metrics")
-    # Print the evaluation metrics
     print("Accuracy:", accuracy)
     print("Precision:", precision)
     print("Recall:", recall)
